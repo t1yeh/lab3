@@ -14,9 +14,9 @@ public class ArrayExamples {
   static int[] reversed(int[] arr) {
     int[] newArray = new int[arr.length];
     for(int i = 0; i < arr.length; i += 1) {
-      arr[i] = newArray[arr.length - i - 1];
+      newArray[i] = arr[arr.length - i - 1];
     }
-    return arr;
+    return newArray;
   }
 
   // Averages the numbers in the array (takes the mean), but leaves out the
@@ -24,15 +24,20 @@ public class ArrayExamples {
   // 1 element in the array
   static double averageWithoutLowest(double[] arr) {
     if(arr.length < 2) { return 0.0; }
-    double lowest = arr[0];
-    for(double num: arr) {
-      if(num < lowest) { lowest = num; }
+
+    int lowestIndex = 0;
+    for(int i = 0; i < arr.length; i++){
+      if(arr[lowestIndex] > arr[i]){
+        lowestIndex = i;
+        break;
+      }
     }
-    double sum = 0;
+    arr[(int) lowestIndex] = 0;
+    int sum = 0;
     for(double num: arr) {
-      if(num != lowest) { sum += num; }
+      sum += num; 
     }
-    return sum / (arr.length - 1);
+    return sum / (double) (arr.length - 1);
   }
 
 
